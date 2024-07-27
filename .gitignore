@@ -28,6 +28,15 @@ lerna-debug.log*
 .settings/
 *.sublime-workspace
 
+# Tests
+/coverage
+/.nyc_output
+data/tests
+data/automated.*.*db
+
+# Docker
+data/docker/*
+
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json

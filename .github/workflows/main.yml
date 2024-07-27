@@ -1,0 +1,56 @@
+name: main
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['*']
+
+env:
+  DB_HOST: localhost
+  DB_PORT: 3306
+  DB_USERNAME: root
+  DB_PASSWORD: secret_123
+  DB_NAME: mysql
+  PORT: 5000
+
+jobs:
+  build:
+    permissions: write-all
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: NPM install with caching
+        uses: bahmutov/npm-install@v1.6.0
+
+      - name: Build
+        run: |
+          npm run lint
+          npm run format
+          npm run build
+          npm run test:cov
+
+      - name: Report LCOV
+        uses: zgosalvez/github-actions-report-lcov@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          coverage-files: ./coverage/lcov.info
+
+      - name: Store coverage
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: coverage
