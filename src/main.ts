@@ -13,8 +13,8 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
 
   const config = new DocumentBuilder()
-    .setTitle('Template API (UPDATE ME!)')
-    .setDescription('Template for building Web APIs (UPDATE ME!)')
+    .setTitle('Template API (TODO: UPDATE THIS!)')
+    .setDescription('Template for building Web APIs (TODO: UPDATE THIS!)')
     .setVersion('1.0')
     .build();
 
