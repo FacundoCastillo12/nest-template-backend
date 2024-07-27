@@ -1,7 +1,6 @@
 import * as dotenv from 'dotenv';
-import { join } from 'path';
 import { DataSource, DataSourceOptions } from 'typeorm';
-import { environmentsConfigs as environmentsConfigs } from './environments.config';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 dotenv.config();
 
@@ -12,16 +11,60 @@ export enum ENVIRONMENT {
   AUTOMATED_TEST = 'automated_tests',
 }
 
+const DATABASE_NAME_TYPE = 'mysql';
+
+const production: DataSourceOptions = {
+  type: DATABASE_NAME_TYPE,
+  host: process.env.DB_HOST,
+  port: +process.env.DB_PORT,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  synchronize: false,
+  namingStrategy: new SnakeNamingStrategy(),
+};
+
+const staging: DataSourceOptions = {
+  type: DATABASE_NAME_TYPE,
+  host: process.env.DB_HOST,
+  port: +process.env.DB_PORT,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  synchronize: false,
+  namingStrategy: new SnakeNamingStrategy(),
+};
+
+const development: DataSourceOptions = {
+  type: DATABASE_NAME_TYPE,
+  host: process.env.DB_HOST,
+  port: +process.env.DB_PORT,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  synchronize: true,
+  namingStrategy: new SnakeNamingStrategy(),
+};
+
+const automatedTests: DataSourceOptions = {
+  type: 'better-sqlite3',
+  database: `./data/automated-test/test.${Math.random()}.db`,
+  synchronize: true,
+  dropSchema: false,
+  verbose: console.log,
+  namingStrategy: new SnakeNamingStrategy(),
+};
+
 export const dataSourceOptions: DataSourceOptions = (() => {
   switch (process.env.NODE_ENV) {
     case ENVIRONMENT.PRODUCTION:
-      return environmentsConfigs.production;
+      return production;
     case ENVIRONMENT.STAGING:
-      return environmentsConfigs.staging;
+      return staging;
     case ENVIRONMENT.DEVELOPMENT:
-      return environmentsConfigs.development;
+      return development;
     case ENVIRONMENT.AUTOMATED_TEST:
-      return environmentsConfigs.automatedTests;
+      return automatedTests;
     default:
       throw new Error('Unknown environment');
   }
@@ -29,11 +72,6 @@ export const dataSourceOptions: DataSourceOptions = (() => {
 
 export default new DataSource({
   ...dataSourceOptions,
-  entities: [
-    join(
-      __dirname,
-      '../modules/**/infrastructure/database/entities/*.entity.ts',
-    ),
-  ],
+  entities: ['./src/**/infrastructure/database/**/*.entity.ts'],
   migrations: ['./data/migrations/*.ts'],
 });

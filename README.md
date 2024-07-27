@@ -26,6 +26,26 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+# NestJS Template
+
+This template provides a robust starting point for a NestJS projects, featuring essential integrations and configurations to streamline development and deployment. The template includes:
+
+- **NestJS**: A progressive Node.js framework for building efficient and scalable server-side applications.
+- **TypeORM**: An ORM for TypeScript and JavaScript with support for various database systems.
+- **Migrations**: Easily manage the database schema and versioning.
+- **Docker Compose**: Containerize the application and its dependencies for consistent development and deployment environments.
+- **MySQL Database**: Pre-configured MySQL database integration.
+- **GitHub Actions Workflow**: Automate the CI/CD pipeline with a ready-to-use GitHub Actions workflow.
+- **Husky**: Ensure code quality with pre-commit hooks, and run tests before pushing to the branch.
+
+## Future Additions
+
+- **Complete User Module**: Basic user management module.
+- **Passport and Strategies**: Authentication with Passport.js.
+- **AWS Cognito**: User authentication and management with AWS Cognito.
+
+This template aims to provide a solid foundation for building modern, scalable applications with NestJS and its ecosystem.
+
 ## Installation
 
 ```bash
@@ -51,23 +71,6 @@ $ npm run start:prod
 # unit tests
 $ npm run test
 
-# e2e tests
-$ npm run test:e2e
-
 # test coverage
 $ npm run test:cov
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).

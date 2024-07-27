@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { configuration } from 'src/configuration/configuration';
-import { dataSourceOptions } from 'src/configuration/typeorm.config';
 import { DataSource } from 'typeorm';
 import { UserModule } from './user/user.module';
+import { configuration } from '@/configuration/configuration';
+import { dataSourceOptions } from '@/configuration/typeorm.config';
 
 @Module({
   imports: [

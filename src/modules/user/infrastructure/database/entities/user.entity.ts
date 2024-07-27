@@ -1,11 +1,14 @@
 import {
+  Column,
   CreateDateColumn,
   DeleteDateColumn,
+  Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-export class BaseEntity {
+@Entity('user')
+export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -17,4 +20,16 @@ export class BaseEntity {
 
   @DeleteDateColumn()
   deletedAt?: Date;
+
+  @Column()
+  name: string;
+
+  @Column()
+  lastName: string;
+
+  @Column()
+  email: string;
+
+  @Column()
+  password: string;
 }
