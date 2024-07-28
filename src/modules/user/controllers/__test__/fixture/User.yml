@@ -1,0 +1,10 @@
+entity: UserEntity
+items:
+  user1:
+    firstName: 'Joe'
+    lastName: 'Doe'
+    email: 'admin@test.com'
+  user{2..10}:
+    firstName: '{{person.firstName}}'
+    lastName: '{{person.lastName}}'
+    email: '{{internet.email}}'

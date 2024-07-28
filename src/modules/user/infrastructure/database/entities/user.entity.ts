@@ -22,14 +22,11 @@ export class UserEntity {
   deletedAt?: Date;
 
   @Column()
-  name: string;
+  firstName: string;
 
   @Column()
   lastName: string;
 
   @Column()
   email: string;
-
-  @Column()
-  password: string;
 }
